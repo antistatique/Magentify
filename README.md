@@ -1,6 +1,6 @@
 # Magentify
 
-[Capistrano](http://capify.org) is an open source tool for executing commands on multiple servers in parallel. It is intended to be used to easily deploying applications. While it was built specifically for deploying Rails apps, it is designed to be easily extended to deploy any type of application or run any number of commands. This project is a deployment recipes collection that works specifically with [Magento](http://www.magentocommerce.com/).
+[Capistrano](http://www.capistranorb.com/) is an open source tool for executing commands on multiple servers in parallel. It is intended to be used to easily deploying applications. While it was built specifically for deploying Rails apps, it is designed to be easily extended to deploy any type of application or run any number of commands. This project is a deployment recipes collection that works specifically with [Magento](http://www.magentocommerce.com/).
 
 ## Installation
 
