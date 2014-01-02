@@ -60,7 +60,13 @@ set  :keep_releases,  3
 
 set :app_symlinks, ["/media", "/var", "/sitemaps", "/staging"]
 set :app_shared_dirs, ["/app/etc", "/sitemaps", "/media", "/var", "/staging"]
-set :app_shared_files, ["/app/etc/local.xml"]'
+set :app_shared_files, ["/app/etc/local.xml"]',
+
+  "Gemfile" => unindent(<<-FILE),
+    source 'http://rubygems.org'
+
+    gem 'magentify'
+  FILE
 
 }
 

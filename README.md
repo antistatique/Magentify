@@ -9,10 +9,11 @@
 ## Project setup
 
     $ magentify .
+    $ bundle install
 
 ## Usage
 
-Once you have run `magentify` on your project it will add a Capfile and deploy.rb configuration file
+Once you have run `magentify` on your project it will add a Capfile and deploy.rb configuration file, and a Gemfile for all the dependencies
 
 ```ruby
 set :application, "magento"
@@ -35,11 +36,11 @@ set :app_shared_files, ["/app/etc/local.xml"]
 
 Once you have magentified your project you can run:
 
-    $ cap -T
+    $ bundle exec cap -T
 
 This will list all the available tasks that can be run with a shot description. For more detailed information about each of the tests run:
 
-    $ cap -e [task_name]
+    $ bundle exec cap -e [task_name]
 
 For detailed information about how to configure and use Capistrano for deployment you should read the Capistrano wiki pages:
 
