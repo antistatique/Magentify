@@ -5,7 +5,7 @@
 ## Installation
 
     $ gem install magentify
-    
+
 ## Project setup
 
     $ magentify .
@@ -36,11 +36,11 @@ set :app_shared_files, ["/app/etc/local.xml"]
 Once you have magentified your project you can run:
 
     $ cap -T
-    
+
 This will list all the available tasks that can be run with a shot description. For more detailed information about each of the tests run:
 
     $ cap -e [task_name]
-    
+
 For detailed information about how to configure and use Capistrano for deployment you should read the Capistrano wiki pages:
 
 * [Getting Started](https://github.com/capistrano/capistrano/wiki/2.x-Getting-Started)
@@ -56,3 +56,11 @@ For detailed information about how to configure and use Capistrano for deploymen
 6. Commit your changes (`git commit -am 'Added some feature'`)
 7. Push to the branch (`git push origin my-new-feature`)
 8. Create new Pull Request
+
+##Getting your development environment to work
+
+1. You're going to need a working sshd server in your localhost, and access for your
+   development user without password.
+2. Download the project
+3. ```bundle install``` to install the dependencies
+4. ```bundle exec cucumber``` to run the tests
