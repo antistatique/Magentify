@@ -40,14 +40,6 @@ namespace :deploy do
   end
 
   desc <<-DESC
-    [Overload] Default actions cancelled.
-  DESC
-  task :migrations do
-    set :migrate_target, :latest
-    # // do nothing for non rails apps
-  end
-
-  desc <<-DESC
     [Overload] Default actions only calls 'update'.
   DESC
   task :cold do
