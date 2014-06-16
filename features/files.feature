@@ -3,7 +3,7 @@ Feature: Files
   As a developer
   I want to pull (and push) medias assets from production server to my local machine
 
-  Scenario: User runs $ files:pull
+  Scenario: User runs $ mages:files:pull
     Given an app
     When I execute deploy
     Then Magento create some assets in media
@@ -11,7 +11,7 @@ Feature: Files
     And I execute files:pull
     Then the local media directory should be synced
 
-  Scenario: User runs $ files:push
+  Scenario: User runs $ mages:files:push
     Given an app
     When I execute deploy
     Then I create some assets locally
