@@ -16,6 +16,7 @@ _cset(:app_shared_files)  {
 
 _cset :compile, false
 _cset :app_webroot, ''
+_cset(:app_config_local_xml_file) { "#{current_path}/app/etc/local.xml" }
 
 namespace :mage do
   desc <<-DESC
@@ -120,6 +121,45 @@ namespace :mage do
   DESC
   task :clean_log, :roles => [:web, :app] do
     run "cd #{current_path}#{app_webroot}/shell && php -f log.php -- clean"
+  end
+
+  namespace :database do
+    def load_database_config(xml)
+      require 'rexml/document'
+      doc, config = REXML::Document.new(xml), {}
+      doc.elements.each('config/global/resources/default_setup/connection/*') do |s|
+        config[s.name] = s.text
+      end
+
+      config
+    end
+
+    desc "Dump & backup remote database into local dir backups/"
+    task :dump, :roles => :app, :except => { :no_release => true } do
+      require 'fileutils'
+
+      filename  = "#{application}.dump.#{Time.now.to_i}.sql.gz"
+      file      = "/tmp/#{filename}"
+      sqlfile   = "#{application}_dump.sql"
+      config    = ""
+
+      data = capture("#{try_sudo} cat #{app_config_local_xml_file}")
+
+      config = load_database_config(data)
+
+      data = capture("#{try_sudo} sh -c 'mysqldump -u#{config['username']} --host='#{config['host']}' --password='#{config['password']}' #{config['dbname']} | gzip -c > #{file}'")
+      puts data
+
+      FileUtils.mkdir_p("backups")
+      get file, "backups/#{filename}"
+      begin
+        FileUtils.ln_sf(filename, "backups/#{application}_dump.latest.sql.gz")
+      rescue Exception # fallback for file systems that don't support symlinks
+        FileUtils.cp_r("backups/#{filename}", "backups/#{application}_dump.latest.sql.gz")
+      end
+      run "#{try_sudo} rm -f #{file}"
+
+    end
   end
 end
 
